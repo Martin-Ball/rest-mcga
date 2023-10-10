@@ -1,8 +1,9 @@
-const fs = require('fs');
-const Product = require("../models/product");
-
 const productData = fs.readFileSync('./data/products.json', 'utf-8');
 const productJSON = JSON.parse(productData);
+const fs = require('fs');
+
+const Product = require("../models/product");
+
 
 exports.getProduct = (req, res) => {
     const productId = req.params.id;
