@@ -1,7 +1,7 @@
-import express from 'express';
-
+const express = require('express');
 const app = express();
-const port = 8000;
+const port = 3000;
+const apiRoutes = require("./routes/routes");
 
 app.get('*', function(req, res){
     res.status(404).send('Error, not found path');
