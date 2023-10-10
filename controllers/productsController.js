@@ -12,7 +12,7 @@ exports.getProduct = (req, res) => {
         return res.status(404).json({ message: 'Producto no encontrado' });
     }
 
-    res.json(productJSON);
+    res.json(product);
 };
 
 exports.getProducts = (req, res) => {
@@ -20,15 +20,13 @@ exports.getProducts = (req, res) => {
 };
   
 exports.createProduct = (req, res) => {
-    const { nombre, precio } = req.body;
+    const { name } = req.body;
 
-    if (!nombre || !precio) {
-        return res.status(400).json({ message: 'Debe proporcionar nombre y precio del producto' });
+    if (!name) {
+        return res.status(400).json({ message: 'Debe proporcionar nombre del producto' });
     }
 
-    const newProduct = new Product(nombre, precio);
-
-    newProduct.id = generateProductId();
+    const newProduct = new Product(generateProductId(), name);
 
     productJSON.push(newProduct);
 
@@ -53,7 +51,7 @@ exports.deleteProduct = (req, res) => {
 };
 
 const saveProductsToJSONFile = () => {
-    fs.writeFileSync('./data/productos.json', JSON.stringify(products, null, 2), 'utf-8');
+    fs.writeFileSync('./data/products.json', JSON.stringify(productJSON, null, 2), 'utf-8');
 }
 
 const generateProductId = () => {
